@@ -3,6 +3,11 @@
 	"displayName": "vscode-makefile-term",
 	"description": "vscode extension for running makefiles from within the editor",
 	"version": "0.0.1",
+	"publisher": "lfm",
+	"repository": {
+        "type": "git",
+        "url": "https://github.com/lfmunoz/vscode-makefile-term"
+    },
 	"engines": {
 		"vscode": "^1.65.0"
 	},
@@ -10,19 +15,52 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:vscode-makefile-term.helloWorld"
+		"onCommand:vscode-makefile-term.enableCodeLens",
+		"onLanguage:makefile"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "vscode-makefile-term.helloWorld",
-				"title": "Hello World"
-			}
-		]
+                "title": "Enable Makefile CodeLens",
+                "command": "vscode-makefile-term.enableCodeLens"
+            },
+            {
+                "title": "Disable Makefile Codelens",
+                "command": "vscode-makefile-term.disableCodeLens"
+            }
+		],
+		"configuration": {
+            "properties": {
+				"vscode-makefile-term.enabled": {
+                    "type": "boolean",
+                    "default": true,
+					"description": "enable or disable the processing of make files"
+                },
+                "vscode-makefile-term.cacheSize": {
+                    "type": "number",
+                    "default": 10,
+					"description": "The number of documents to cache so doesn't reprocess when switching tabs (not implemeted)"
+                },
+                "vscode-makefile-term.commandTemplate": {
+                    "type": "string",
+                    "default": "cd %!makefileDir!%; make %!target!%",
+					"description": "Specifies what command to run on terminal. See docs for proper synatx (not implemeted)"
+				},
+                "vscode-makefile-term.titleTemplate": {
+                    "type": "string",
+                    "default": " ▶ make %!target!% ",
+					"description": "Specifies the text to display above target (not implemeted)"
+				}
+            }
+        }
 	},
 	"scripts": {
-		"vscode:prepublish": "npm run compile",
+		"vscode:prepublish": "npm run esbuild-base -- --minify",
+		"esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=out/main.js --external:vscode --format=cjs --platform=node",
+		"esbuild": "npm run esbuild-base -- --sourcemap",
+		"esbuild-watch": "npm run esbuild-base -- --sourcemap --watch",
+		"test-compile": "tsc -p ./",
 		"compile": "tsc -p ./",
 		"watch": "tsc -watch -p ./",
 		"pretest": "npm run compile && npm run lint",
@@ -30,16 +68,17 @@
 		"test": "node ./out/test/runTest.js"
 	},
 	"devDependencies": {
-		"@types/vscode": "^1.65.0",
 		"@types/glob": "^7.2.0",
 		"@types/mocha": "^9.1.0",
 		"@types/node": "14.x",
+		"@types/vscode": "^1.65.0",
 		"@typescript-eslint/eslint-plugin": "^5.12.1",
 		"@typescript-eslint/parser": "^5.12.1",
+		"@vscode/test-electron": "^2.1.2",
+		"esbuild": "^0.14.25",
 		"eslint": "^8.9.0",
 		"glob": "^7.2.0",
 		"mocha": "^9.2.1",
-		"typescript": "^4.5.5",
-		"@vscode/test-electron": "^2.1.2"
+		"typescript": "^4.5.5"
 	}
 }

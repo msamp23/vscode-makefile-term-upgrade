@@ -1,26 +1,47 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
+import * as path from 'path';
+import { MakefileProvider } from './MakefileProvider';
+import { EXT_NAME } from './Config';
+
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
-	
+    const codelensProvider = new MakefileProvider();
+
+	vscode.window.showInformationMessage(`[${EXT_NAME}] - extension ACTIVATED!`);
+	console.log(`[${EXT_NAME}] - extension ACTIVATED!`); 
+
+	// https://code.visualstudio.com/docs/languages/identifiers
+    context.subscriptions.push(
+		vscode.languages.registerCodeLensProvider({ language: 'makefile' }, codelensProvider)
+	);
+
+	context.subscriptions.push(vscode.commands.registerCommand(`${EXT_NAME}.enableCodeLens`, () => {
+        vscode.workspace.getConfiguration(EXT_NAME).update("enabled", true, true);
+    }));
+
+    context.subscriptions.push(vscode.commands.registerCommand(`${EXT_NAME}.disableCodeLens`, () => {
+        vscode.workspace.getConfiguration(EXT_NAME).update("enabled", false, true);
+    }));
+
 	// Use the console to output diagnostic information (console.log) and errors (console.error)
 	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "vscode-makefile-term" is now active!');
-
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('vscode-makefile-term.helloWorld', () => {
-		// The code you place here will be executed every time your command is executed
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from vscode-makefile-term!');
-	});
-
-	context.subscriptions.push(disposable);
+    context.subscriptions.push(vscode.commands.registerCommand(`${EXT_NAME}.make`, (target: string, filename: string) => {
+		console.log(`[${EXT_NAME}] - action - target=${target} filename=${filename}!`); 
+        const makefileDir = path.dirname(filename);
+        let term = vscode.window.activeTerminal;
+        if(term === undefined) {
+            term = vscode.window.createTerminal();
+        }
+        term.show();
+        term.sendText(`cd ${makefileDir}; make ${target}`);
+	}));
 }
 
 // this method is called when your extension is deactivated
-export function deactivate() {}
+export function deactivate() {
+	console.log(`[${EXT_NAME}] - extension - DEACTIVATED!`); 
+}
