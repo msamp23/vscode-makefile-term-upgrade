@@ -3,6 +3,7 @@
 	"displayName": "vscode-makefile-term",
 	"description": "vscode extension for running makefiles from within the editor",
 	"version": "0.0.1",
+	"icon": "media/icon.png",
 	"publisher": "lfm",
 	"repository": {
         "type": "git",
