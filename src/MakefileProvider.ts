@@ -31,15 +31,15 @@ export class MakefileProvider implements vscode.CodeLensProvider {
     public provideCodeLenses(document: vscode.TextDocument, token: vscode.CancellationToken): vscode.CodeLens[] | Thenable<vscode.CodeLens[]> {
         if (!this.enabled()) { return []; }
         this.codeLenses = [];
-                    // title: ` ▶ run target ${target} `,
         const text = document.getText().split("\n");
         for(let i = 0; i < text.length; i++) {
             if( (text[i][0] >= 'a' && text[i][0] <= 'z') || (text[i][0] >= 'A' && text[i][0] <= 'Z') ) {
                 const indexOfColon = text[i].indexOf(":");
-                if(indexOfColon === -1) {continue;}
+                if(indexOfColon === -1) {continue;} // must have colon
+                const target = text[i].substring(0, indexOfColon);
+                if(target.indexOf("=") !== -1) {continue;}  // must not have equals
                 const position = new vscode.Position(i, 0);
                 const range = document.getWordRangeAtPosition(position) as vscode.Range;
-                const target = text[i].substring(0, indexOfColon);
                 const codeLens = new vscode.CodeLens(range, {
                     title: ` ▶ make ${target}`,
                     tooltip: "runs target in terminal",

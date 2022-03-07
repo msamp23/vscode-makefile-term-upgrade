@@ -32,12 +32,13 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(vscode.commands.registerCommand(`${EXT_NAME}.make`, (target: string, filename: string) => {
 		console.log(`[${EXT_NAME}] - action - target=${target} filename=${filename}!`); 
         const makefileDir = path.dirname(filename);
+        const file = path.basename(filename);
         let term = vscode.window.activeTerminal;
         if(term === undefined) {
             term = vscode.window.createTerminal();
         }
         term.show();
-        term.sendText(`cd ${makefileDir}; make ${target}`);
+        term.sendText(`cd ${makefileDir}; make -f ${file} ${target}`);
 	}));
 }
 

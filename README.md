@@ -9,7 +9,7 @@ cd ${makefileDir}; make ${target}
 ```
 * `makefileDir` - the directory of the Makefile that is being edited
 * `target`  - the text found using the following logic: 
-  * `/(^[a-zA-Z]+:)/` - any line starting with an alphabetic string followed by a colon
+  * `/(^[a-zA-Z]+):/` - any line starting with an alphabetic string followed by a colon
 
 ## Features
 
@@ -35,17 +35,16 @@ See `package.json` for available settings.
 
 ## Release Notes
 
+### 0.0.1
 
-### 0.0.1 - beta relase
-
-* initial working simple functionality
+* initial working functionality
 
 
 -----------------------------------------------------------------------------------------------------------
 
 # Contributing
 
-Feedback and pull requests are welcomed
+Feedback and pull requests feature requests are welcomed. 
 
 ## Following extension guidelines
 
