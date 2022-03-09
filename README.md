@@ -1,13 +1,14 @@
 # vscode-makefile-term 
 
 This extension allows you to run a `Makefile` TARGET from within the
-editor by clicking right above the TARGET name. It will execute
-the following command in the terminal
+editor by clicking above the TARGET. It will execute the following command in the terminal
 
 ```bash
 cd ${makefileDir}; make -f ${filename} ${target}
 ```
+
 * `makefileDir` - the directory of the Makefile that is being edited
+* `filename` - file where you clicked the TARGET
 * `target`  - the text found using the following logic: 
   *  any line starting with an alphabetic string followed by a colon and not including `=`
 
@@ -54,7 +55,7 @@ Feedback and pull requests feature requests are welcomed.
 
 ## Following extension guidelines
 
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
+Ensure that you've read through the extensions guidelines and follow the best practices for creating extensions.
 
 * [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
 
