@@ -47,6 +47,8 @@ See `package.json` for available settings.
 
 ### 0.0.3
 
+* minor text corrections
+
 -----------------------------------------------------------------------------------------------------------
 
 # Contributing
