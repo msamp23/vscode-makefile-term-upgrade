@@ -1,7 +1,7 @@
 {
 	"name": "vscode-makefile-term",
 	"displayName": "vscode-makefile-term",
-	"description": "vscode extension for running makefiles from within the editor",
+	"description": "Run makefiles from within the editor by clicking on target",
 	"version": "0.0.2",
 	"icon": "media/icon.png",
 	"publisher": "lfm",
