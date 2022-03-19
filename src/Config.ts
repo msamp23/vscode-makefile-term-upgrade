@@ -1,8 +1,11 @@
 
-class Config {
+export class Config {
     private static _instance: Config;
 
-    private constructor() { }
+    public static runAgain: string =  '';
+
+    private constructor() { 
+    }
 
     // eslint-disable-next-line @typescript-eslint/naming-convention
     public static get Instance() {
@@ -11,6 +14,5 @@ class Config {
 }
 
 
-export const configInstance = Config.Instance;
 
 export const EXT_NAME = "vscode-makefile-term";

@@ -32,7 +32,11 @@
             {
                 "title": "Disable Makefile Codelens",
                 "command": "vscode-makefile-term.disableCodeLens"
-            }
+            },
+			{
+				"title": "Run target again (or do nothing)",
+				"command": "vscode-makefile-term.runAgain"
+			}
 		],
 		"configuration": {
             "properties": {
@@ -57,7 +61,14 @@
 					"description": "Specifies the text to display above target (not implemeted)"
 				}
             }
-        }
+        },
+		"keybindings": [
+            {
+                "command": "vscode-makefile-term.runAgain",
+                "key": "Ctrl+Shift+x",
+                "mac": "Ctrl+Shift+x"
+            }
+		]
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run esbuild-base -- --minify",
