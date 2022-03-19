@@ -51,7 +51,7 @@ See `package.json` for available settings.
 
 ### 0.0.4
 
-* added keybidining to run again (alt+x by default)
+* added keybidining to run again (Ctrl+Shift+x by default)
 * ignore lines with `=` as cannot be target
 
 -----------------------------------------------------------------------------------------------------------
