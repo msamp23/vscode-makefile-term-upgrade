@@ -11,6 +11,7 @@ test:
 	npm run test-compile
 
 publish:
+	# nvm use v16.14.0
 	# vsix generated
 	vsce package
 	# vsce publish
