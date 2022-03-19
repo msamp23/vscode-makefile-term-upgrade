@@ -50,15 +50,15 @@
                     "default": 10,
 					"description": "The number of documents to cache so doesn't reprocess when switching tabs (not implemeted)"
                 },
-                "vscode-makefile-term.commandTemplate": {
+                "vscode-makefile-term.cmdTemplate": {
                     "type": "string",
-                    "default": "cd %!makefileDir!%; make %!target!%",
-					"description": "Specifies what command to run on terminal. See docs for proper synatx (not implemeted)"
+                    "default": "cd %makefileDir%; make -f %file% %target%",
+					"description": "Specifies what command to run on terminal."
 				},
-                "vscode-makefile-term.titleTemplate": {
+                "vscode-makefile-term.textTemplate": {
                     "type": "string",
-                    "default": " ▶ make %!target!% ",
-					"description": "Specifies the text to display above target (not implemeted)"
+                    "default": " ▶ make %target% ",
+					"description": "Specifies the text to display above target"
 				}
             }
         },

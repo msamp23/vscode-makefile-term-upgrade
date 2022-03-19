@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { EXT_NAME } from './Config';
+import { EXT_NAME, DEFUALT_TOOLTIP, DEFAULT_CMD, DEFAULT_TEXT, Config} from './Config';
 /*
     MakefileProvider
     https://code.visualstudio.com/api/references/vscode-api
@@ -22,6 +22,10 @@ export class MakefileProvider implements vscode.CodeLensProvider {
         vscode.workspace.onDidChangeConfiguration((_) => {
             console.log("onDidChangeConfiguration");
             this._onDidChangeCodeLenses.fire();
+            let newCmdTemplate = vscode.workspace.getConfiguration(EXT_NAME).get('cmdTemplate', DEFAULT_CMD);
+            Config.setCmdTemplate(newCmdTemplate);
+            let newTextTemplate = vscode.workspace.getConfiguration(EXT_NAME).get('textTemplate', DEFAULT_TEXT);
+            Config.setTextTemplate(newTextTemplate);
         });
     }
 
@@ -40,11 +44,12 @@ export class MakefileProvider implements vscode.CodeLensProvider {
                 const target = text[i].substring(0, indexOfColon);
                 const position = new vscode.Position(i, 0);
                 const range = document.getWordRangeAtPosition(position) as vscode.Range;
+                const title = Config.replaceTextTemplate(document.fileName, target);
                 const codeLens = new vscode.CodeLens(range, {
-                    title: ` ▶ make ${target}`,
-                    tooltip: "runs target in terminal",
+                    title: title,
+                    tooltip: DEFUALT_TOOLTIP,
                     command: `${EXT_NAME}.make`,
-                    arguments: [target, document.fileName]
+                    arguments: [document.fileName, target]
                 });
                 this.codeLenses.push(codeLens);
             } 

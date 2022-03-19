@@ -4,35 +4,39 @@ This extension allows you to run a `Makefile` `target` from within the
 editor by clicking above the `target`. It will execute the following command in the terminal:
 
 ```bash
-cd ${makefileDir}; make -f ${filename} ${target}
+# note this is configurable
+cd %makefileDir% make -f %file% %target%
 ```
 
-* `makefileDir` - the directory of the Makefile that is being edited
-* `filename` - file where you clicked the TARGET
-* `target`  - the text found using the following logic: 
+* `%makefileDir%` - the directory of the Makefile that is being edited
+* `%file%` - file where you clicked the TARGET
+* `%target%`  - the text found using the following logic: 
   *  any line starting with an alphabeticnumeric string followed by a colon and not including `=`
+
+Only the following place holders are available: `%target%`, `%makefileDir%`, `%file%`.  There is also a keybinding to run the previously clicked target again (default `Ctrl+Shift+x`)
 
 ## Features
 
 ![screenshot](https://raw.githubusercontent.com/lfmunoz/vscode-makefile-term/main/media/screenshot.png)
 
 
+## Extension Settings
+
+See `package.json` for full available settings. 
+
+* "vscode-makefile-term.enabled": true
+* "vscode-makefile-term.textTemplate": " ▶ make %target% "
+* "vscode-makefile-term.cmdTemplate": "cd %makefileDir%; make -f %file% %target%"
+
 ## Requirements
 
 * Tested on vscode 1.65.0
 
-## Extension Settings
-
-See `package.json` for available settings. 
-
-* vscode-makefile-term.enabled
 
 ## Known Issues
 
-* Can increase performance with a cache
-* Can make extension more adaptable by allowing changing configurable:
-  * command that is execute
-  * text that is displayed above target
+* Can increase performance with a cache (not a problem so far)
+* The command template and the text template that is user defined use `replace` and not `replaceAll`. This means each variable can be replaced 1 or 0 times.
 
 ## Release Notes
 
@@ -53,6 +57,13 @@ See `package.json` for available settings.
 
 * added keybidining to run again (Ctrl+Shift+x by default)
 * ignore lines with `=` as cannot be target
+* removed pop-up to indicate extension is activated
+
+### 0.0.5
+
+* support for a user defined commands to run when clicking on target
+* support for user defiend text that is displayed above target
+
 
 -----------------------------------------------------------------------------------------------------------
 

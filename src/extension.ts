@@ -3,7 +3,7 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { MakefileProvider } from './MakefileProvider';
-import { EXT_NAME, Config } from './Config';
+import { EXT_NAME, DEFAULT_CMD, DEFAULT_TEXT, Config } from './Config';
 
 
 // this method is called when your extension is activated
@@ -37,16 +37,14 @@ export function activate(context: vscode.ExtensionContext) {
 
 	// Use the console to output diagnostic information (console.log) and errors (console.error)
 	// This line of code will only be executed once when your extension is activated
-    context.subscriptions.push(vscode.commands.registerCommand(`${EXT_NAME}.make`, (target: string, filename: string) => {
+    context.subscriptions.push(vscode.commands.registerCommand(`${EXT_NAME}.make`, ( filename: string, target: string,) => {
 		console.log(`[${EXT_NAME}] - action - target=${target} filename=${filename}!`); 
-        const makefileDir = path.dirname(filename);
-        const file = path.basename(filename);
         let term = vscode.window.activeTerminal;
         if(term === undefined) {
             term = vscode.window.createTerminal();
         }
         term.show();
-        Config.runAgain = `cd ${makefileDir}; make -f ${file} ${target}`;
+        Config.runAgain = Config.replaceCmdTemplate(filename, target);
         term.sendText(Config.runAgain);
 	}));
 }
