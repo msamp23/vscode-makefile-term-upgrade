@@ -3,7 +3,7 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { MakefileProvider } from './MakefileProvider';
-import { EXT_NAME } from './Config';
+import { EXT_NAME, Config } from './Config';
 
 
 // this method is called when your extension is activated
@@ -11,7 +11,6 @@ import { EXT_NAME } from './Config';
 export function activate(context: vscode.ExtensionContext) {
     const codelensProvider = new MakefileProvider();
 
-	vscode.window.showInformationMessage(`[${EXT_NAME}] - extension ACTIVATED!`);
 	console.log(`[${EXT_NAME}] - extension ACTIVATED!`); 
 
 	// https://code.visualstudio.com/docs/languages/identifiers
@@ -27,6 +26,15 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.workspace.getConfiguration(EXT_NAME).update("enabled", false, true);
     }));
 
+    context.subscriptions.push(vscode.commands.registerCommand(`${EXT_NAME}.runAgain`, () => {
+        let term = vscode.window.activeTerminal;
+        if(term === undefined) {
+            term = vscode.window.createTerminal();
+        }
+        term.show();
+        if(Config.runAgain !== "") { term.sendText(Config.runAgain); }
+    }));
+
 	// Use the console to output diagnostic information (console.log) and errors (console.error)
 	// This line of code will only be executed once when your extension is activated
     context.subscriptions.push(vscode.commands.registerCommand(`${EXT_NAME}.make`, (target: string, filename: string) => {
@@ -38,7 +46,8 @@ export function activate(context: vscode.ExtensionContext) {
             term = vscode.window.createTerminal();
         }
         term.show();
-        term.sendText(`cd ${makefileDir}; make -f ${file} ${target}`);
+        Config.runAgain = `cd ${makefileDir}; make -f ${file} ${target}`;
+        term.sendText(Config.runAgain);
 	}));
 }
 
