@@ -46,7 +46,7 @@ export function activate(context: vscode.ExtensionContext) {
             term = vscode.window.createTerminal();
         }
         term.show();
-        Config.runAgain = `cd ${makefileDir}; make -f ${file} ${target}`;
+        Config.runAgain = `cd "${makefileDir}"; make -f ${file} ${target}`;
         term.sendText(Config.runAgain);
 	}));
 }
