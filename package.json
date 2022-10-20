@@ -6,18 +6,22 @@
 	"icon": "media/icon.png",
 	"publisher": "lfm",
 	"repository": {
-        "type": "git",
-        "url": "https://github.com/lfmunoz/vscode-makefile-term"
-    },
+		"type": "git",
+		"url": "https://github.com/lfmunoz/vscode-makefile-term"
+	},
 	"engines": {
 		"vscode": "^1.65.0"
 	},
 	"categories": [
-        "Programming Languages", "Debuggers", "Other"
-    ],
+		"Programming Languages",
+		"Debuggers",
+		"Other"
+	],
 	"keywords": [
-        "C", "C++", "Makefile"
-    ],
+		"C",
+		"C++",
+		"Makefile"
+	],
 	"activationEvents": [
 		"onCommand:vscode-makefile-term.enableCodeLens",
 		"onLanguage:makefile"
@@ -26,48 +30,48 @@
 	"contributes": {
 		"commands": [
 			{
-                "title": "Enable Makefile CodeLens",
-                "command": "vscode-makefile-term.enableCodeLens"
-            },
-            {
-                "title": "Disable Makefile Codelens",
-                "command": "vscode-makefile-term.disableCodeLens"
-            },
+				"title": "Enable Makefile CodeLens",
+				"command": "vscode-makefile-term.enableCodeLens"
+			},
+			{
+				"title": "Disable Makefile Codelens",
+				"command": "vscode-makefile-term.disableCodeLens"
+			},
 			{
 				"title": "Run target again (or do nothing)",
 				"command": "vscode-makefile-term.runAgain"
 			}
 		],
 		"configuration": {
-            "properties": {
+			"properties": {
 				"vscode-makefile-term.enabled": {
-                    "type": "boolean",
-                    "default": true,
+					"type": "boolean",
+					"default": true,
 					"description": "enable or disable the processing of make files"
-                },
-                "vscode-makefile-term.cacheSize": {
-                    "type": "number",
-                    "default": 10,
+				},
+				"vscode-makefile-term.cacheSize": {
+					"type": "number",
+					"default": 10,
 					"description": "The number of documents to cache so doesn't reprocess when switching tabs (not implemeted)"
-                },
-                "vscode-makefile-term.commandTemplate": {
-                    "type": "string",
-                    "default": "cd %!makefileDir!%; make %!target!%",
+				},
+				"vscode-makefile-term.commandTemplate": {
+					"type": "string",
+					"default": "cd %!makefileDir!%; make %!target!%",
 					"description": "Specifies what command to run on terminal. See docs for proper synatx (not implemeted)"
 				},
-                "vscode-makefile-term.titleTemplate": {
-                    "type": "string",
-                    "default": " ▶ make %!target!% ",
+				"vscode-makefile-term.titleTemplate": {
+					"type": "string",
+					"default": " ▶ make %!target!% ",
 					"description": "Specifies the text to display above target (not implemeted)"
 				}
-            }
-        },
+			}
+		},
 		"keybindings": [
-            {
-                "command": "vscode-makefile-term.runAgain",
-                "key": "Ctrl+Shift+x",
-                "mac": "Ctrl+Shift+x"
-            }
+			{
+				"command": "vscode-makefile-term.runAgain",
+				"key": "Ctrl+Shift+x",
+				"mac": "Ctrl+Shift+x"
+			}
 		]
 	},
 	"scripts": {

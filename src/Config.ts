@@ -2,9 +2,9 @@
 export class Config {
     private static _instance: Config;
 
-    public static runAgain: string =  '';
+    public static runAgain: string = '';
 
-    private constructor() { 
+    private constructor() {
     }
 
     // eslint-disable-next-line @typescript-eslint/naming-convention
