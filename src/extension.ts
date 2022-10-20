@@ -11,14 +11,14 @@ import { EXT_NAME, Config } from './Config';
 export function activate(context: vscode.ExtensionContext) {
     const codelensProvider = new MakefileProvider();
 
-	console.log(`[${EXT_NAME}] - extension ACTIVATED!`); 
+    console.log(`[${EXT_NAME}] - extension ACTIVATED!`);
 
-	// https://code.visualstudio.com/docs/languages/identifiers
+    // https://code.visualstudio.com/docs/languages/identifiers
     context.subscriptions.push(
-		vscode.languages.registerCodeLensProvider({ language: 'makefile' }, codelensProvider)
-	);
+        vscode.languages.registerCodeLensProvider({ language: 'makefile' }, codelensProvider)
+    );
 
-	context.subscriptions.push(vscode.commands.registerCommand(`${EXT_NAME}.enableCodeLens`, () => {
+    context.subscriptions.push(vscode.commands.registerCommand(`${EXT_NAME}.enableCodeLens`, () => {
         vscode.workspace.getConfiguration(EXT_NAME).update("enabled", true, true);
     }));
 
@@ -28,30 +28,30 @@ export function activate(context: vscode.ExtensionContext) {
 
     context.subscriptions.push(vscode.commands.registerCommand(`${EXT_NAME}.runAgain`, () => {
         let term = vscode.window.activeTerminal;
-        if(term === undefined) {
+        if (term === undefined) {
             term = vscode.window.createTerminal();
         }
         term.show();
-        if(Config.runAgain !== "") { term.sendText(Config.runAgain); }
+        if (Config.runAgain !== "") { term.sendText(Config.runAgain); }
     }));
 
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
+    // Use the console to output diagnostic information (console.log) and errors (console.error)
+    // This line of code will only be executed once when your extension is activated
     context.subscriptions.push(vscode.commands.registerCommand(`${EXT_NAME}.make`, (target: string, filename: string) => {
-		console.log(`[${EXT_NAME}] - action - target=${target} filename=${filename}!`); 
+        console.log(`[${EXT_NAME}] - action - target=${target} filename=${filename}!`);
         const makefileDir = path.dirname(filename);
         const file = path.basename(filename);
         let term = vscode.window.activeTerminal;
-        if(term === undefined) {
+        if (term === undefined) {
             term = vscode.window.createTerminal();
         }
         term.show();
         Config.runAgain = `cd "${makefileDir}"; make -f ${file} ${target}`;
         term.sendText(Config.runAgain);
-	}));
+    }));
 }
 
 // this method is called when your extension is deactivated
 export function deactivate() {
-	console.log(`[${EXT_NAME}] - extension - DEACTIVATED!`); 
+    console.log(`[${EXT_NAME}] - extension - DEACTIVATED!`);
 }

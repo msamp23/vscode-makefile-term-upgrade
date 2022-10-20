@@ -15,10 +15,10 @@ export class MakefileProvider implements vscode.CodeLensProvider {
         through script when I switch tabs.
     */
     constructor() {
-        vscode.workspace.onWillSaveTextDocument(( e: vscode.TextDocumentWillSaveEvent) => {
+        vscode.workspace.onWillSaveTextDocument((e: vscode.TextDocumentWillSaveEvent) => {
             console.log("onWillSaveTextDocument");
         });
-        
+
         vscode.workspace.onDidChangeConfiguration((_) => {
             console.log("onDidChangeConfiguration");
             this._onDidChangeCodeLenses.fire();
@@ -32,11 +32,11 @@ export class MakefileProvider implements vscode.CodeLensProvider {
         if (!this.enabled()) { return []; }
         this.codeLenses = [];
         const text = document.getText().split("\n");
-        for(let i = 0; i < text.length; i++) {
-            if( (text[i][0] >= 'a' && text[i][0] <= 'z') || (text[i][0] >= 'A' && text[i][0] <= 'Z') ) {
-                if(text[i].indexOf("=") !== -1) { continue; }  // must not have equals
+        for (let i = 0; i < text.length; i++) {
+            if ((text[i][0] >= 'a' && text[i][0] <= 'z') || (text[i][0] >= 'A' && text[i][0] <= 'Z')) {
+                if (text[i].indexOf("=") !== -1) { continue; }  // must not have equals
                 const indexOfColon = text[i].indexOf(":");
-                if(indexOfColon === -1) {continue;} // must have colon
+                if (indexOfColon === -1) { continue; } // must have colon
                 const target = text[i].substring(0, indexOfColon);
                 const position = new vscode.Position(i, 0);
                 const range = document.getWordRangeAtPosition(position) as vscode.Range;
@@ -47,16 +47,16 @@ export class MakefileProvider implements vscode.CodeLensProvider {
                     arguments: [target, document.fileName]
                 });
                 this.codeLenses.push(codeLens);
-            } 
+            }
         }
         return this.codeLenses;
-        
+
     }
 
     /*
         @return: true if the codelens are enabled, false otherwise.
     */
-    private enabled() : boolean {
+    private enabled(): boolean {
         return vscode.workspace.getConfiguration(EXT_NAME).get("enableCodeLens", true);
     }
 }
