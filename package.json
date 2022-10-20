@@ -2,7 +2,7 @@
 	"name": "vscode-makefile-term",
 	"displayName": "vscode-makefile-term",
 	"description": "Run makefiles from within the editor by clicking on target",
-	"version": "0.0.4",
+	"version": "0.1.0",
 	"icon": "media/icon.png",
 	"publisher": "lfm",
 	"repository": {

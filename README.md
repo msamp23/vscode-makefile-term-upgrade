@@ -19,7 +19,7 @@ cd ${makefileDir}; make -f ${filename} ${target}
 
 ## Requirements
 
-* Tested on vscode 1.65.0
+* Tested on vscode 1.72.2
 
 ## Extension Settings
 
@@ -53,6 +53,12 @@ See `package.json` for available settings.
 
 * added keybidining to run again (Ctrl+Shift+x by default)
 * ignore lines with `=` as cannot be target
+
+### 0.1.0
+
+* Bumping version, extension is getting stable
+* Support for makefile in directory with spaces in path
+* Updated code formatting
 
 -----------------------------------------------------------------------------------------------------------
 

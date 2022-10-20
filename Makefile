@@ -11,6 +11,7 @@ test:
 	npm run test-compile
 
 publish:
+	# npm install -g vsce
 	# vsix generated
 	vsce package
 	# vsce publish
@@ -22,8 +23,8 @@ publish:
 # vsce login lfm
 
 info:
-	# v12.22.10
 	node --version
+	nvm use v16.14.0
 
 clean:
 	-rm -rf out
