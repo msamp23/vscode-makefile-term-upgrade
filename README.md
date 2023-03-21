@@ -4,7 +4,7 @@ This extension allows you to run a `Makefile` `target` from within the
 editor by clicking above the `target`. It will execute the following command in the terminal:
 
 ```bash
-cd ${makefileDir}; make -f ${filename} ${target}
+cd ${makefileDir} && make -f ${filename} ${target}
 ```
 
 * `makefileDir` - the directory of the Makefile that is being edited
@@ -59,6 +59,11 @@ See `package.json` for available settings.
 * Bumping version, extension is getting stable
 * Support for makefile in directory with spaces in path
 * Updated code formatting
+
+### 0.1.1
+
+* Change command to use `&&` instead of `;`
+
 
 -----------------------------------------------------------------------------------------------------------
 

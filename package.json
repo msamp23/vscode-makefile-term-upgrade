@@ -56,7 +56,7 @@
 				},
 				"vscode-makefile-term.commandTemplate": {
 					"type": "string",
-					"default": "cd %!makefileDir!%; make %!target!%",
+					"default": "cd %!makefileDir!% && make %!target!%",
 					"description": "Specifies what command to run on terminal. See docs for proper synatx (not implemeted)"
 				},
 				"vscode-makefile-term.titleTemplate": {
