@@ -1,5 +1,8 @@
 # vscode-makefile-term 
 
+
+This Extensions is forked for testing and is being updated to provide new capabilties in future.
+
 This extension allows you to run a `Makefile` `target` from within the
 editor by clicking above the `target`. It will execute the following command in the terminal:
 
@@ -80,4 +83,6 @@ Feedback and pull requests are welcomed.
 Ensure that you've read through the extensions guidelines and follow the best practices for creating extensions.
 
 * [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
+
+Note: This Extensions is forked for testing and is being updated to provide new capabilties in future. 
 
