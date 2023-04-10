@@ -12,7 +12,7 @@ export function activate(context: vscode.ExtensionContext) {
     const codelensProvider = new MakefileProvider();
 
     console.log(`[${EXT_NAME}] - extension ACTIVATED!`);
-
+   
     // https://code.visualstudio.com/docs/languages/identifiers
     context.subscriptions.push(
         vscode.languages.registerCodeLensProvider({ language: 'makefile' }, codelensProvider)
@@ -49,6 +49,7 @@ export function activate(context: vscode.ExtensionContext) {
         Config.runAgain = `cd "${makefileDir}" && make -f ${file} ${target}`;
         term.sendText(Config.runAgain);
     }));
+    Config.testFun();
 }
 
 // this method is called when your extension is deactivated
