@@ -1,13 +1,13 @@
 {
-	"name": "vscode-makefile-term",
+	"name": "vscode-makefile-term-upgrade",
 	"displayName": "vscode-makefile-term",
 	"description": "Run makefiles from within the editor by clicking on target",
 	"version": "0.1.2",
 	"icon": "media/icon.png",
-	"publisher": "lfm",
+	"publisher": "msamp23",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/lfmunoz/vscode-makefile-term"
+		"url": "https://github.com/msamp23/vscode-makefile-term-upgrade"
 	},
 	"engines": {
 		"vscode": "^1.65.0"
