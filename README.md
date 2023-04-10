@@ -64,6 +64,10 @@ See `package.json` for available settings.
 
 * Change command to use `&&` instead of `;`
 
+### 0.1.2
+
+* Forked version to provide newer capabilities
+
 
 -----------------------------------------------------------------------------------------------------------
 
